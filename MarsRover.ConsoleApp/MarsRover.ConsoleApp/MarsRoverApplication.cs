@@ -23,12 +23,14 @@ namespace MarsRover.ConsoleApp
             List<Rover> rovers = new List<Rover>();
 
             Navigation navigation = _navigationService.Init(1, 2, "N");
-            rovers.Add(_roverService.Init(plateau, navigation));
+            Rover rover1 = _roverService.Init(plateau, navigation);
+            rovers.Add(rover1);
             List<Navigate> navigates = _navigationService.Movements("LMLMLMLMM");
             _roverService.SurroundTerrain(navigates);
 
             navigation = _navigationService.Init(3, 3, "E");
-            rovers.Add(_roverService.Init(plateau, navigation));
+            Rover rover2 = _roverService.Init(plateau, navigation);
+            rovers.Add(rover2);
             navigates = _navigationService.Movements("MMRMMRMRRM");
             _roverService.SurroundTerrain(navigates);
 

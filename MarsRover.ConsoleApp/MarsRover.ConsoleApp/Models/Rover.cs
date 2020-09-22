@@ -9,7 +9,6 @@ namespace MarsRover.ConsoleApp.Models
             Navigation = navigation;
         }
 
-        public Guid Id { get => Guid.NewGuid(); }
         public Navigation Navigation { get; set; }
     }
 }
