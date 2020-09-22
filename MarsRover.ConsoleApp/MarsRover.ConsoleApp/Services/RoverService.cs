@@ -40,7 +40,7 @@ namespace MarsRover.ConsoleApp.Services
 
         private void CheckNavigation(Plateau plateau, Navigation navigation)
         {
-            if (plateau.Height < navigation.Y || plateau.Width < navigation.X)
+            if (plateau.Height < navigation.Y || plateau.Width < navigation.X || navigation.X < 0 || navigation.Y < 0)
                 throw new Exception("The Rover was destroyed because such an area could not be found on the plateau.");
         }
 

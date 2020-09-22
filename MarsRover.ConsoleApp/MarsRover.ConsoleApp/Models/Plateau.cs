@@ -17,7 +17,10 @@
             set
             {
                 if (value < 0)
+                {
                     width = 0;
+                    return;
+                }
                 width = value;
             }
         }
@@ -28,7 +31,11 @@
             set
             {
                 if (value < 0)
+                {
                     height = 0;
+                    return;
+                }
+                    
                 height = value;
             }
         }
