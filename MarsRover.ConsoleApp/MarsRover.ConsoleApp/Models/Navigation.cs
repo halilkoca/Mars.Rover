@@ -8,7 +8,7 @@ namespace MarsRover.ConsoleApp.Models
         {
             X = x;
             Y = y;
-            Direction = Enum.TryParse(directionStr, out CardinalDirection direction) ? direction : throw new Exception();
+            Direction = Enum.TryParse(directionStr, out CardinalDirection direction) ? direction : throw new Exception("No direction found!");
         }
 
         private int x { get; set; }

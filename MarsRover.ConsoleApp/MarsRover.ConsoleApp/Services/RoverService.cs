@@ -1,5 +1,6 @@
 ﻿using MarsRover.ConsoleApp.Factory;
 using MarsRover.ConsoleApp.Models;
+using System;
 using System.Collections.Generic;
 
 namespace MarsRover.ConsoleApp.Services
@@ -13,6 +14,7 @@ namespace MarsRover.ConsoleApp.Services
     public class RoverService : IRoverService
     {
         private Rover _rover;
+        private Plateau _plateau;
         private IRoverCommandFactory _roverCommand;
 
         public RoverService(IRoverCommandFactory roverCommand)
@@ -22,6 +24,8 @@ namespace MarsRover.ConsoleApp.Services
 
         public Rover Init(Plateau plateau, Navigation navigation)
         {
+            CheckNavigation(plateau, navigation);
+            _plateau = plateau;
             return _rover = new Rover(navigation);
         }
 
@@ -30,7 +34,15 @@ namespace MarsRover.ConsoleApp.Services
             foreach (var item in navigates)
             {
                 _roverCommand.NavigateRover(item).ExecuteCommand(_rover.Navigation);
+                CheckNavigation(_plateau, _rover.Navigation);
             }
         }
+
+        private void CheckNavigation(Plateau plateau, Navigation navigation)
+        {
+            if (plateau.Height < navigation.Y || plateau.Width < navigation.X)
+                throw new Exception("The Rover was destroyed because such an area could not be found on the plateau.");
+        }
+
     }
 }

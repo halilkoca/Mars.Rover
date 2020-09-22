@@ -1,6 +1,7 @@
 ﻿using MarsRover.ConsoleApp.Factory;
 using MarsRover.ConsoleApp.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace MarsRover.ConsoleApp
@@ -15,11 +16,14 @@ namespace MarsRover.ConsoleApp
             IServiceScope scope = _serviceProvider.CreateScope();
             scope.ServiceProvider.GetRequiredService<MarsRoverApplication>().Run();
             DisposeServices();
+            Console.ReadLine();
         }
 
         private static void RegisterServices()
         {
             var services = new ServiceCollection();
+            services.AddLogging(configure => configure.AddConsole())
+                .AddTransient<MarsRoverApplication>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IRoverCommandFactory, RoverCommandFactory>();
             services.AddSingleton<IRoverService, RoverService>();
