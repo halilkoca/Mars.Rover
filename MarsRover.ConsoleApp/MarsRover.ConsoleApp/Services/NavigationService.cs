@@ -1,4 +1,5 @@
 ﻿using MarsRover.ConsoleApp.Models;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 
 namespace MarsRover.ConsoleApp.Services
@@ -11,9 +12,17 @@ namespace MarsRover.ConsoleApp.Services
 
     public class NavigationService : INavigationService
     {
+        private ILogger _logger;
+        public NavigationService(ILogger<NavigationService> logger)
+        {
+            _logger = logger;
+        }
+
         public Navigation Init(int x, int y, string direction)
         {
-            return new Navigation(x, y, direction);
+            Navigation navigation = new Navigation(x, y, direction);
+            _logger.LogInformation("New navigation has been set ");
+            return navigation;
         }
 
         public List<Navigate> Movements(string directions)
@@ -39,6 +48,7 @@ namespace MarsRover.ConsoleApp.Services
                     }
                 }
             }
+            _logger.LogInformation("New movements has been set");
             return navigates;
         }
     }

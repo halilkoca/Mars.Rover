@@ -1,4 +1,5 @@
 ﻿using MarsRover.ConsoleApp.Models;
+using Microsoft.Extensions.Logging;
 
 namespace MarsRover.ConsoleApp.Services
 {
@@ -9,9 +10,16 @@ namespace MarsRover.ConsoleApp.Services
 
     public class PlateauService : IPlateauService
     {
+        private ILogger _logger;
+        public PlateauService(ILogger<PlateauService> logger)
+        {
+            _logger = logger;
+        }
         public Plateau Init(int width, int height)
         {
-            return new Plateau(width, height);
+            Plateau plateau = new Plateau(width, height);
+            _logger.LogInformation("Found new plateau!");
+            return plateau;
         }
     }
 }
