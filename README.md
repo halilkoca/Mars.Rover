@@ -1,7 +1,13 @@
 # Mars.Rover
 .Net Core Mars Rover Console Application
 
+# Design Patterns
+![alt text](images/design-patterns.png)
 
+___________________________________________
+
+# Logs
+![alt text](images/logs.png)
 
 # References
 
